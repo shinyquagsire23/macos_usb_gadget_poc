@@ -8,11 +8,14 @@ SYSROOT  := $(shell xcrun --sdk $(SDK) --show-sdk-path)
 ifeq ($(SYSROOT),)
 $(error Could not find SDK "$(SDK)")
 endif
-CLANG    := $(shell xcrun --sdk $(SDK) --find clang)
+CLANG    := clang
 CC       := $(CLANG) -isysroot $(SYSROOT) -arch $(ARCH)
 
-CFLAGS  = -O2 -Wall
-LDFLAGS =
+#CFLAGS  = -O1 -Wall -g -fstack-protector-all -fsanitize=address -fsanitize=float-divide-by-zero -fsanitize=leak
+#LDFLAGS = -fsanitize=address -fsanitize=float-divide-by-zero -static-libsan -fsanitize=leak
+
+CFLAGS  = -O1 -Wall -g -fstack-protector-all
+LDFLAGS = 
 
 ifneq ($(DEBUG),0)
 DEFINES += -DDEBUG=$(DEBUG)
@@ -20,7 +23,7 @@ endif
 
 FRAMEWORKS = -framework CoreFoundation -framework IOKit
 
-SOURCES = main.c
+SOURCES = main.c alt_IOUSBDeviceControllerLib.c
 
 HEADERS = 
 

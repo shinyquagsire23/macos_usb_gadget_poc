@@ -1,2 +1,5 @@
-usb_device
-junk.txt
+usb_device/usb_device
+usb_device/junk.txt
+usb_device/usb_device.dSYM
+usbgadget/usbgadget.kext
+.DS_Store
